@@ -78,7 +78,7 @@ def fast_view_find_all(view, regex_string):
 
 def ansi_definitions(content=None):
 
-    settings = sublime.load_settings("SublimeHOL.sublime-settings")
+    settings = sublime.load_settings("HOL.sublime-settings")
 
     if content is None:
         bgs = settings.get('ANSI_BG', [])
@@ -138,22 +138,22 @@ class AnsiRegion(object):
             return p - (end - begin)
 
 
-class AnsiCommand(sublime_plugin.TextCommand):
+class HolAnsiCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, regions=None, clear_before=False):
         view = self.view
-        if view.settings().get("ansi_in_progress", False):
+        if view.settings().get("hol_ansi_in_progress", False):
             debug(view, "oops ... the ansi command is already in progress")
             return
-        view.settings().set("ansi_in_progress", True)
+        view.settings().set("hol_ansi_in_progress", True)
 
-        view.settings().set("ansi_enabled", True)
-        view.settings().set("color_scheme", "Packages/SublimeHOL/ANSI/ansi.tmTheme")
+        view.settings().set("hol_ansi_enabled", True)
+        view.settings().set("color_scheme", "Packages/User/HOL/ansi.tmTheme")
         view.settings().set("draw_white_space", "none")
 
         # save the view's original scratch and read only settings
-        if not view.settings().has("ansi_scratch"):
-            view.settings().set("ansi_scratch", view.is_scratch())
+        if not view.settings().has("hol_ansi_scratch"):
+            view.settings().set("hol_ansi_scratch", view.is_scratch())
         view.set_scratch(True)
 
         if clear_before:
@@ -164,8 +164,8 @@ class AnsiCommand(sublime_plugin.TextCommand):
         else:
             self._colorize_regions(regions)
 
-        view.settings().set("ansi_in_progress", False)
-        view.settings().set("ansi_size", view.size())
+        view.settings().set("hol_ansi_in_progress", False)
+        view.settings().set("hol_ansi_size", view.size())
 
     def _colorize_regions(self, regions):
         view = self.view
@@ -223,7 +223,7 @@ class AnsiCommand(sublime_plugin.TextCommand):
         for ansi in ansi_definitions():
             view.erase_regions(ansi.scope)
 
-class AnsiColorBuildCommand(Default.exec.ExecCommand):
+class HolAnsiColourBuildCommand(Default.exec.ExecCommand):
 
     process_trigger = "on_finish"
 
@@ -237,7 +237,7 @@ class AnsiColorBuildCommand(Default.exec.ExecCommand):
             self.process_trigger = val
         else:
             self.process_trigger = None
-            sublime.error_message("SublimeHOL - ANSI settings warning:\n\nThe setting ANSI_process_trigger has been set to an invalid value; must be one of 'on_finish' or 'on_data'.")
+            sublime.error_message("HOL - ANSI settings warning:\n\nThe setting ANSI_process_trigger has been set to an invalid value; must be one of 'on_finish' or 'on_data'.")
 
     @classmethod
     def clear_build_settings(self, settings):
@@ -254,7 +254,7 @@ class AnsiColorBuildCommand(Default.exec.ExecCommand):
     def on_data_process(self, proc, data):
         view = self.output_view
         if not view.settings().get("repl",False):
-            super(AnsiColorBuildCommand, self).on_data(proc, data)
+            super(HolAnsiColourBuildCommand, self).on_data(proc, data)
             return
 
         str_data = self.auto_string_codec(data, 'decode', self.encoding)
@@ -287,7 +287,7 @@ class AnsiColorBuildCommand(Default.exec.ExecCommand):
         out_data = self.auto_string_codec(out_data, 'encode', self.encoding)
 
         # send on_data without ansi codes
-        super(AnsiColorBuildCommand, self).on_data(proc, out_data)
+        super(HolAnsiColourBuildCommand, self).on_data(proc, out_data)
 
         # create json serialable region representation
         json_ansi_regions = {}
@@ -297,20 +297,20 @@ class AnsiColorBuildCommand(Default.exec.ExecCommand):
             json_ansi_regions.update(region.jsonable())
 
         # send ansi command
-        view.run_command('ansi', args={"regions": json_ansi_regions})
+        view.run_command('hol_ansi', args={"regions": json_ansi_regions})
 
     def on_data(self, proc, data):
         if self.process_trigger == "on_data":
             self.on_data_process(proc, data)
         else:
-            super(AnsiColorBuildCommand, self).on_data(proc, data)
+            super(HolAnsiColourBuildCommand, self).on_data(proc, data)
 
     def on_finished(self, proc):
-        super(AnsiColorBuildCommand, self).on_finished(proc)
+        super(HolAnsiColourBuildCommand, self).on_finished(proc)
         if self.process_trigger == "on_finish":
             view = self.output_view
             if view.settings().get("repl",False):
-                view.run_command("ansi", args={"clear_before": True})
+                view.run_command("hol_ansi", args={"clear_before": True})
 
 
 CS_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
@@ -333,7 +333,7 @@ ANSI_SCOPE = "<dict><key>scope</key><string>{0}{1}</string><key>settings</key><d
 
 
 def generate_color_scheme(cs_file, settings):
-    print("Regenerating ANSI color scheme...")
+    print("HOL: Regenerating ANSI color scheme...")
     cs_scopes = ""
     for bg in settings.get("ANSI_BG", []):
         for fg in settings.get("ANSI_FG", []):
@@ -351,9 +351,9 @@ def generate_color_scheme(cs_file, settings):
 
 def plugin_loaded():
     # load pluggin settings
-    settings = sublime.load_settings("SublimeHOL.sublime-settings")
+    settings = sublime.load_settings("HOL.sublime-settings")
     # create ansi color scheme directory
-    ansi_cs_dir = os.path.join(sublime.packages_path(), "SublimeHOL", "ANSI")
+    ansi_cs_dir = os.path.join(sublime.packages_path(), "User", "HOL")
     if not os.path.exists(ansi_cs_dir):
         os.makedirs(ansi_cs_dir)
     # create ansi color scheme file
@@ -361,14 +361,14 @@ def plugin_loaded():
     if not os.path.isfile(cs_file):
         generate_color_scheme(cs_file, settings)
     # update the settings for the plugin
-    AnsiColorBuildCommand.update_build_settings(settings)
-    settings.add_on_change("ANSI_COLORS_CHANGE", lambda: generate_color_scheme(cs_file, settings))
-    settings.add_on_change("ANSI_TRIGGER_CHANGE", lambda: AnsiColorBuildCommand.update_build_settings(settings))
+    HolAnsiColourBuildCommand.update_build_settings(settings)
+    settings.add_on_change("HOL_ANSI_COLORS_CHANGE", lambda: generate_color_scheme(cs_file, settings))
+    settings.add_on_change("HOL_ANSI_TRIGGER_CHANGE", lambda: HolAnsiColourBuildCommand.update_build_settings(settings))
 
 
 def plugin_unloaded():
     # update the settings for the plugin
-    settings = sublime.load_settings("SublimeHOL.sublime-settings")
-    AnsiColorBuildCommand.clear_build_settings(settings)
-    settings.clear_on_change("ANSI_COLORS_CHANGE")
-    settings.clear_on_change("ANSI_TRIGGER_CHANGE")
+    settings = sublime.load_settings("HOL.sublime-settings")
+    HolAnsiColourBuildCommand.clear_build_settings(settings)
+    settings.clear_on_change("HOL_ANSI_COLORS_CHANGE")
+    settings.clear_on_change("HOL_ANSI_TRIGGER_CHANGE")

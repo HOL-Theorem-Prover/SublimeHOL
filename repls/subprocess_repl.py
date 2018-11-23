@@ -57,7 +57,7 @@ class SubprocessRepl(Repl):
 
     def __init__(self, encoding, cmd=None, env=None, cwd=None, extend_env=None, soft_quit="", autocomplete_server=False, preexec_fn=None, **kwds):
         super(SubprocessRepl, self).__init__(encoding, **kwds)
-        settings = load_settings('SublimeHOL.sublime-settings')
+        settings = load_settings('HOL.sublime-settings')
 
         if cmd[0] == "[unsupported]":
             raise Unsupported(cmd[1:])
@@ -149,7 +149,7 @@ class SubprocessRepl(Repl):
                 import traceback
                 traceback.print_exc()
                 error_message(
-                    "SublimeHOL: obtaining sane environment failed in getenv()\n"
+                    "HOL: obtaining sane environment failed in getenv()\n"
                     "Check console and 'getenv_command' setting \n"
                     "WARN: Falling back to SublimeText environment")
 

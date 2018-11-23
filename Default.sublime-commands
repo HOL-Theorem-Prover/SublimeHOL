@@ -1,6 +1,15 @@
+
 [
     {
-        "caption": "SublimeHOL: Restart REPL",
-        "command": "repl_restart"
+        "caption": "HOL: Run REPL",
+        "command": "run_existing_window_command", "args":
+        {
+            "id": "repl_hol",
+            "file": "Main.sublime-menu"
+        }
+    },
+    {
+        "caption": "HOL: Restart REPL",
+        "command": "hol_repl_restart"
     }
 ]

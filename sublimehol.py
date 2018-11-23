@@ -33,7 +33,7 @@ except ImportError:
     PY2 = True
 
 PLATFORM = sublime.platform().lower()
-SETTINGS_FILE = 'SublimeHOL.sublime-settings'
+SETTINGS_FILE = 'HOL.sublime-settings'
 SUBLIME2 = sublime.version() < '3000'
 
 RESTART_MSG = """
@@ -42,19 +42,19 @@ RESTART_MSG = """
 #############
 """
 
-class ReplInsertTextCommand(sublime_plugin.TextCommand):
+class HolReplInsertTextCommand(sublime_plugin.TextCommand):
     def run(self, edit, pos, text):
         self.view.set_read_only(False)  # make sure view is writable
         self.view.insert(edit, int(pos), text)
 
 
-class ReplEraseTextCommand(sublime_plugin.TextCommand):
+class HolReplEraseTextCommand(sublime_plugin.TextCommand):
     def run(self, edit, start, end):
         self.view.set_read_only(False)  # make sure view is writable
         self.view.erase(edit, sublime.Region(int(start), int(end)))
 
 
-class ReplPass(sublime_plugin.TextCommand):
+class HolReplPass(sublime_plugin.TextCommand):
     def run(self, edit):
         pass
 
@@ -133,7 +133,7 @@ class MemHistory(History):
 class PersistentHistory(MemHistory):
     def __init__(self, external_id):
         super(PersistentHistory, self).__init__()
-        path = os.path.join(sublime.packages_path(), "User", ".SublimeHOLHistory")
+        path = os.path.join(sublime.packages_path(), "User", ".HOLHistory")
         if not os.path.isdir(path):
             os.makedirs(path)
         filepath = os.path.join(path, external_id + ".db")
@@ -222,7 +222,7 @@ class ReplView(object):
             self._window.focus_view(view)
 
         #setup ANSI
-        self._view.run_command('ansi')
+        self._view.run_command('hol_ansi')
         
         # begin refreshing attached view
         self.update_view_loop()
@@ -324,7 +324,7 @@ class ReplView(object):
             v = self._view
             vsize = v.size()
             self._output_end = min(vsize, self._output_end)
-            v.run_command("repl_erase_text", {"start": self._output_end, "end": vsize})
+            v.run_command("hol_repl_erase_text", {"start": self._output_end, "end": vsize})
         else:
             self._output_end = self._view.size()
 
@@ -379,11 +379,11 @@ class ReplView(object):
                 out_data = str_data
                 json_ansi_regions = None
             # send on_data without ansi codes
-            self._view.run_command("repl_insert_text", {"pos": self._view.size(), "text": out_data})
+            self._view.run_command("hol_repl_insert_text", {"pos": self._view.size(), "text": out_data})
 
             # send ansi command
             if json_ansi_regions:
-                self._view.run_command('ansi', args={"regions": json_ansi_regions})
+                self._view.run_command('hol_ansi', args={"regions": json_ansi_regions})
             self._output_end += len(out_data)
             self._view.show(self.input_region)
 
@@ -398,7 +398,7 @@ class ReplView(object):
         if edit:
             self._view.insert(edit, self._view.size(), text)
         else:
-            self._view.run_command("repl_insert_text", {"pos": self._view.size(), "text": text})
+            self._view.run_command("hol_repl_insert_text", {"pos": self._view.size(), "text": text})
 
     def handle_repl_output(self):
         """Returns new data from Repl and bool indicating if Repl is still
@@ -428,7 +428,7 @@ class ReplView(object):
                     self._view.add_regions('sublimehol', regions, 'invalid',
                                            '', sublime.DRAW_EMPTY | sublime.DRAW_OUTLINED)
                 else:
-                    print('SublimeHOL: unknown REPL opcode: ' + opcode)
+                    print('HOL: unknown REPL opcode: ' + opcode)
         else:
             self.write(packet)
 
@@ -664,12 +664,12 @@ manager = ReplManager()
 
 
 # Opens a new REPL
-class ReplOpenCommand(sublime_plugin.WindowCommand):
+class HolReplOpenCommand(sublime_plugin.WindowCommand):
     def run(self, encoding, type, syntax=None, view_id=None, **kwds):
         manager.open(self.window, encoding, type, syntax, view_id, **kwds)
 
 
-class ReplRestartCommand(sublime_plugin.TextCommand):
+class HolReplRestartCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         manager.restart(self.view, edit)
 
@@ -685,22 +685,22 @@ class ReplRestartCommand(sublime_plugin.TextCommand):
 
 
 # Submits the Command to the REPL
-class ReplEnterCommand(sublime_plugin.TextCommand):
+class HolReplEnterCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.enter()
 
 
-class ReplClearCommand(sublime_plugin.TextCommand):
+class HolReplClearCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.clear(edit)
 
 
-# Resets Repl Command Line
-class ReplEscapeCommand(sublime_plugin.TextCommand):
+# Resets HolRepl Command Line
+class HolReplEscapeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
@@ -717,70 +717,70 @@ def repl_view_delta(sublime_view):
     return rv, delta
 
 
-class ReplBackspaceCommand(sublime_plugin.TextCommand):
+class HolReplBackspaceCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_backspace()
 
 
-class ReplCtrlBackspaceCommand(sublime_plugin.TextCommand):
+class HolReplCtrlBackspaceCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_ctrl_backspace()
 
 
-class ReplSuperBackspaceCommand(sublime_plugin.TextCommand):
+class HolReplSuperBackspaceCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_super_backspace()
 
 
-class ReplLeftCommand(sublime_plugin.TextCommand):
+class HolReplLeftCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_left()
 
 
-class ReplShiftLeftCommand(sublime_plugin.TextCommand):
+class HolReplShiftLeftCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_shift_left()
 
 
-class ReplHomeCommand(sublime_plugin.TextCommand):
+class HolReplHomeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_home()
 
 
-class ReplShiftHomeCommand(sublime_plugin.TextCommand):
+class HolReplShiftHomeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.on_shift_home()
 
 
-class ReplViewPreviousCommand(sublime_plugin.TextCommand):
+class HolReplViewPreviousCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.previous_command(edit)
 
 
-class ReplViewNextCommand(sublime_plugin.TextCommand):
+class HolReplViewNextCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
             rv.next_command(edit)
 
 
-class ReplKillCommand(sublime_plugin.TextCommand):
+class HolReplKillCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         rv = manager.repl_view(self.view)
         if rv:
@@ -797,7 +797,7 @@ class ReplKillCommand(sublime_plugin.TextCommand):
 class SublimeHOLListener(sublime_plugin.EventListener):
     def on_selection_modified(self, view):
         rv = manager.repl_view(view)
-        if rv and not view.settings().get("ansi_in_progress", False):
+        if rv and not view.settings().get("hol_ansi_in_progress", False):
             rv.on_selection_modified()
 
     def on_close(self, view):
@@ -813,16 +813,16 @@ class SublimeHOLListener(sublime_plugin.EventListener):
         if command_name == 'left_delete':
             # stop backspace on ST3 w/o breaking brackets
             if not rv.allow_deletion():
-                return 'repl_pass', {}
+                return 'hol_repl_pass', {}
 
         if command_name == 'delete_word' and not args.get('forward'):
             # stop ctrl+backspace on ST3 w/o breaking brackets
             if not rv.allow_deletion():
-                return 'repl_pass', {}
+                return 'hol_repl_pass', {}
 
         return None
 
-class SubprocessReplSendSignal(sublime_plugin.TextCommand):
+class HolSubprocessReplSendSignal(sublime_plugin.TextCommand):
     def run(self, edit, signal=None):
         rv = manager.repl_view(self.view)
         subrepl = rv.repl

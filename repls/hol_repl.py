@@ -5,16 +5,16 @@ import signal
 from sublime import load_settings, error_message
 from .subprocess_repl import SubprocessRepl
 
-class SublimeHOLRepl(SubprocessRepl):
-    TYPE = "sublime_hol"
+class HOLRepl(SubprocessRepl):
+    TYPE = "hol_repl"
 
     def __init__(self, encoding, cmd=None, **kwds):
-        super(SublimeHOLRepl, self).__init__(encoding, cmd=cmd, preexec_fn=os.setsid, **kwds)
+        super(HOLRepl, self).__init__(encoding, cmd=cmd, preexec_fn=os.setsid, **kwds)
         self.write("current_backend := PPBackEnd.vt100_terminal;\n")
    
     def write(self, command):
         #strip the command of terms and strings and comments
-        stripped_command = re.sub('\`\`([\w\s\S]*?)\`\`','',stripped_command)
+        stripped_command = re.sub('\`\`([\w\s\S]*?)\`\`','',command)
         stripped_command = re.sub('\`([\w\s\S]*?)\`','',stripped_command)
         stripped_command = re.sub('\“([\w\s\S]*?)\”','',stripped_command)
         stripped_command = re.sub('\‘([\w\s\S]*?)\’','',stripped_command)
@@ -37,7 +37,7 @@ class SublimeHOLRepl(SubprocessRepl):
 
         #run final command
         new_cmd = dep_string + command
-        return super(SublimeHOLRepl, self).write(new_cmd)
+        return super(HOLRepl, self).write(new_cmd)
     def send_signal(self, sig):
         if sig == signal.SIGTERM:
             self._killed = True

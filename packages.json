@@ -1,9 +1,9 @@
 {
     "schema_version": "0.0.1",
     "packages": [{
-        "name": "SublimeHOL",
+        "name": "HOL",
         "details": "https://github.com/JamesShaker/SublimeHOL",
-        "description": "SublimeHOL - A HOL Development Environment built on top of slimmed down, heavily modified versions of SublimeREPL (https://github.com/wuub/SublimeREPL), SublimeANSI (https://github.com/aziz/SublimeANSI), and SML-syntax (https://github.com/Takaia/SML-syntax) hackily put together.",
+        "description": "A HOL ITP Development Environment with colour REPL.",
         "releases": [
             {
                 "sublime_text": "*",

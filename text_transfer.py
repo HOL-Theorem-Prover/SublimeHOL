@@ -43,7 +43,7 @@ def sender(external_id,):
         SENDERS[external_id] = func
     return wrap
 
-class ReplViewWrite(sublime_plugin.TextCommand):
+class HolReplViewWrite(sublime_plugin.TextCommand):
     def run(self, edit, external_id, text):
         for rv in manager.find_repl(external_id):
             rv.append_input_text(text)
@@ -52,7 +52,7 @@ class ReplViewWrite(sublime_plugin.TextCommand):
             sublime.error_message("Cannot find REPL for '{0}'".format(external_id))
 
 
-class ReplSend(sublime_plugin.TextCommand):
+class HolReplSend(sublime_plugin.TextCommand):
     def run(self, edit, external_id, text, with_auto_postfix=True):
         for rv in manager.find_repl(external_id):
             if with_auto_postfix:
@@ -66,7 +66,7 @@ class ReplSend(sublime_plugin.TextCommand):
             sublime.error_message("Cannot find REPL for '{}'".format(external_id))
 
 
-class ReplTransferCurrent(sublime_plugin.TextCommand):
+class HolReplTransferCurrent(sublime_plugin.TextCommand):
     def run(self, edit, scope="selection", action="send", prepend="", append=""):
         text = ""
         if scope == "selection":
@@ -78,7 +78,7 @@ class ReplTransferCurrent(sublime_plugin.TextCommand):
         elif scope == "file":
             text = self.selected_file()
         text = prepend + text + append
-        cmd = "repl_" + action
+        cmd = "hol_repl_" + action
         self.view.window().run_command(cmd, {"external_id": self.repl_external_id(), "text": text})
 
     def repl_external_id(self):

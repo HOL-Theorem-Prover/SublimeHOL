@@ -3,55 +3,64 @@
         "id": "tools",
         "children":
         [{
-            "caption": "SublimeHOL",
+            "caption": "HOL",
             "mnemonic": "H",
-            "id": "SublimeHOL",
+            "id": "HOL",
             "children":
             [
-                {"command": "hol_start", 
+                {"command": "hol_repl_open", 
                  "caption": "Open REPL",
+                 "id": "repl_hol",
                  "mnemonic": "O",
+                 "args": {
+                    "type": "hol_repl",
+                    "encoding": "utf8",
+                    "cmd": ["hol"],
+                    "cwd": "$file_path",
+                    "external_id": "hol",
+                    "syntax": "Packages/HOL/config/HOL/HOL.sublime-syntax"
+                    }
                 },
                 { "caption": "-" },
                 {"caption": "Eval in REPL",
                  "children":
                     [
-                        {"caption": "Selection", "command": "repl_transfer_current", "args": {"scope": "selection"}},
-                        {"caption": "Selection (Quiet)", "args": {"scope": "selection", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
-                        {"caption": "Lines", "command": "repl_transfer_current", "args": {"scope": "lines"}},
-                        {"caption": "Lines (Quiet)", "command": "repl_transfer_current", "args": {"scope": "lines", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
-                        {"caption": "File", "command": "repl_transfer_current", "args": {"scope": "file"}}
+                        {"caption": "Selection", "command": "hol_repl_transfer_current", "args": {"scope": "selection"}},
+                        {"caption": "Selection (Quiet)", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
+                        {"caption": "Lines", "command": "hol_repl_transfer_current", "args": {"scope": "lines"}},
+                        {"caption": "Lines (Quiet)", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
+                        {"caption": "File", "command": "hol_repl_transfer_current", "args": {"scope": "file"}}
                 ]},
                 {"caption": "Custom Selection Eval in REPL",
                  "children":
                     [
-                        { "caption":"Goal", "command": "repl_transfer_current", "args": {"scope": "selection", "prepend": "g(", "append":");"}},
-                        { "caption":"Subgoal", "command": "repl_transfer_current", "args": {"scope": "selection", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
-                        { "caption":"Sufficient Condition", "command": "repl_transfer_current", "args": {"scope": "selection", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
-                        { "caption":"Tactic", "command": "repl_transfer_current", "args": {"scope": "selection", "prepend": "e(", "append":");"}}
+                        { "caption":"Goal", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "g(", "append":");"}},
+                        { "caption":"Subgoal", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
+                        { "caption":"Sufficient Condition", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
+                        { "caption":"Tactic", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(", "append":");"}}
                 ]},
                 {"caption": "Custom Line Eval in REPL",
                  "children":
                     [
-                        { "caption":"Goal", "command": "repl_transfer_current", "args": {"scope": "lines", "prepend": "g(", "append":");"}},
-                        { "caption":"Subgoal", "command": "repl_transfer_current", "args": {"scope": "lines", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
-                        { "caption":"Sufficient Condition", "command": "repl_transfer_current", "args": {"scope": "lines", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
-                        { "caption":"Tactic", "command": "repl_transfer_current", "args": {"scope": "lines", "prepend": "e(", "append":");"}}
+                        { "caption":"Goal", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "g(", "append":");"}},
+                        { "caption":"Subgoal", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
+                        { "caption":"Sufficient Condition", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
+                        { "caption":"Tactic", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(", "append":");"}}
                 ]},
                 {"caption": "REPL Control",
                  "children":
                     [
-                        { "caption":"Print Current Goal", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
-                        { "caption":"Go Back", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
-                        { "caption":"Restart Proof", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
+                        { "caption":"Print Current Goal", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
+                        { "caption":"Go Back", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
+                        { "caption":"Restart Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
                 ]},        
                 {"caption": "Toggle Flags On/Off",
                  "children":
                     [
-                        { "caption":"Show Types", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "show_types := (not (!show_types));"}},
-                        { "caption":"Show Assums", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "show_assums := (not (!show_assums));"}},
-                        { "caption":"Print Goal at Top", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");"}},
-                        { "caption":"Print Free Variables", "command": "repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");"}}
+                        { "caption":"Show Types", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_types := (not (!show_types));"}},
+                        { "caption":"Show Assums", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_assums := (not (!show_assums));"}},
+                        { "caption":"Print Goal at Top", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");"}},
+                        { "caption":"Print Free Variables", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");"}}
                 ]}, 
 
             ]   
@@ -70,24 +79,57 @@
                 "children":
                 [
                     {
-                        "caption": "SublimeHOL",
+                        "caption": "HOL",
                         "children":
                         [
                             {
-                                "command": "open_file", "args":
-                                {
-                                    "file": "${packages}/SublimeHOL/SublimeHOL.sublime-settings"
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/HOL/Default (OSX).sublime-keymap",
+                                    "platform": "OSX"
                                 },
-                                "caption": "Settings – Default"
+                                "caption": "Key Bindings – Default"
                             },
                             {
-                                "command": "open_file", "args":
-                                {
-                                    "file": "${packages}/User/SublimeHOL.sublime-settings"
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/HOL/Default (Linux).sublime-keymap",
+                                    "platform": "Linux"
                                 },
-                                "caption": "Settings – User"
+                                "caption": "Key Bindings – Default"
                             },
-                            { "caption": "-" }
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/HOL/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (OSX).sublime-keymap",
+                                    "platform": "OSX"
+                                },
+                                "caption": "Key Bindings – User"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (Linux).sublime-keymap",
+                                    "platform": "Linux"
+                                },
+                                "caption": "Key Bindings – User"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – User"
+                            }
                         ]
                     }
                 ]

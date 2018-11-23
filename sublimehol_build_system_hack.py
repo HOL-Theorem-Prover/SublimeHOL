@@ -7,7 +7,7 @@ except ImportError:
     import Queue as queue
 
 RESULTS = None
-HACK_BUILD_SYSTEM = "Packages/SublimeHOL/sublimehol_build_system_hack.sublime-build"
+HACK_BUILD_SYSTEM = "Packages/HOL/sublimehol_build_system_hack.sublime-build"
 AUTOMATIC_BUILD_SYSTEM = ""
 
 

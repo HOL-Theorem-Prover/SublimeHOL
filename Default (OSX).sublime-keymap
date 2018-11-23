@@ -1,5 +1,5 @@
 [
-	{ "keys": ["up"], "command": "repl_view_previous",
+	{ "keys": ["up"], "command": "hol_repl_view_previous",
 	"context":
 		[
 			{ "key": "setting.history_arrows", "operator": "equal", "operand": true },
@@ -7,14 +7,14 @@
 			{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
 		]
 	},
-	{ "keys": ["ctrl+p"], "command": "repl_view_previous",
+	{ "keys": ["ctrl+p"], "command": "hol_repl_view_previous",
 	"context":
 		[
 			{ "key": "setting.history_arrows", "operator": "equal", "operand": false },
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["down"], "command": "repl_view_next",
+	{ "keys": ["down"], "command": "hol_repl_view_next",
 	"context":
 		[
 			{ "key": "setting.history_arrows", "operator": "equal", "operand": true },
@@ -22,35 +22,35 @@
 			{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
 		]
 	},
-	{ "keys": ["ctrl+n"], "command": "repl_view_next",
+	{ "keys": ["ctrl+n"], "command": "hol_repl_view_next",
 	"context":
 		[
 			{ "key": "setting.history_arrows", "operator": "equal", "operand": false },
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["enter"], "command": "repl_enter", "args": {},
+	{ "keys": ["enter"], "command": "hol_repl_enter", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true },
 			{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
 		]
 	},
-	{ "keys": ["enter"], "command": "repl_enter", "args": {},
+	{ "keys": ["enter"], "command": "hol_repl_enter", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true },
 			{ "key": "setting.auto_complete_commit_on_tab", "operand": true }
 		]
 	},
-	{ "keys": ["escape"], "command": "repl_escape", "args": {},
+	{ "keys": ["escape"], "command": "hol_repl_escape", "args": {},
 	"context":
 		[
 			{ "key": "auto_complete_visible", "operator": "equal", "operand": false },
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["backspace"], "command": "repl_backspace", "args": {},
+	{ "keys": ["backspace"], "command": "hol_repl_backspace", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true },
@@ -58,7 +58,7 @@
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
 		]
 	},
-	{ "keys": ["ctrl+backspace"], "command": "repl_ctrl_backspace", "args": {},
+	{ "keys": ["ctrl+backspace"], "command": "hol_repl_ctrl_backspace", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true },
@@ -66,61 +66,86 @@
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
 		]
 	},
-	{ "keys": ["super+backspace"], "command": "repl_super_backspace", "args": {},
+	{ "keys": ["super+backspace"], "command": "hol_repl_super_backspace", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
 		]
 	},
-	{ "keys": ["alt+backspace"], "command": "repl_ctrl_backspace", "args": {},
+	{ "keys": ["alt+backspace"], "command": "hol_repl_ctrl_backspace", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true }
 		]
 	},
-	{ "keys": ["left"], "command": "repl_left", "args": {},
+	{ "keys": ["left"], "command": "hol_repl_left", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["home"], "command": "repl_home", "args": {},
+	{ "keys": ["home"], "command": "hol_repl_home", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["ctrl+a"], "command": "repl_home", "args": {},
+	{ "keys": ["ctrl+a"], "command": "hol_repl_home", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["shift+left"], "command": "repl_shift_left", "args": {},
+	{ "keys": ["shift+left"], "command": "hol_repl_shift_left", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["shift+home"], "command": "repl_shift_home", "args": {},
+	{ "keys": ["shift+home"], "command": "hol_repl_shift_home", "args": {},
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["ctrl+l"], "command": "repl_clear",
+	{ "keys": ["ctrl+l"], "command": "hol_repl_clear",
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["shift+ctrl+c"], "command": "subprocess_repl_send_signal", "args": {"signal": 2},  // sigint
+	{ "keys": ["shift+ctrl+c"], "command": "hol_subprocess_repl_send_signal", "args": {"signal": 2},  // sigint
 	"context":
 		[
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
+	{ "keys": ["ctrl+,", "q", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
+	{ "keys": ["ctrl+,", "q", "l"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
+
+	{ "keys": ["ctrl+,", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "selection"}},
+	{ "keys": ["ctrl+,", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "g(", "append":");"}},
+	{ "keys": ["ctrl+,", "s", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
+	{ "keys": ["ctrl+,", "s", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
+	{ "keys": ["ctrl+,", "e"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(", "append":");"}},
+
+	{ "keys": ["ctrl+,", "l", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "lines"}},
+	{ "keys": ["ctrl+,", "l", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "g(", "append":");"}},
+	{ "keys": ["ctrl+,", "l", "s", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
+	{ "keys": ["ctrl+,", "l", "s", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
+	{ "keys": ["ctrl+,", "l", "e"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(", "append":");"}},
+
+	{ "keys": ["ctrl+,", "t"], "command": "hol_repl_transfer_current", "args": {"scope": "file"}},
+
+	{ "keys": ["ctrl+,", "p"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
+	{ "keys": ["ctrl+,", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
+	{ "keys": ["ctrl+,", "r"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
+
+	{ "keys": ["ctrl+,", "f", "y"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_types := (not (!show_types));"}},
+	{ "keys": ["ctrl+,", "f", "a"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_assums := (not (!show_assums));"}},
+	{ "keys": ["ctrl+,", "f", "t"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");"}},
+	{ "keys": ["ctrl+,", "f", "f"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");"}}
 
 ]

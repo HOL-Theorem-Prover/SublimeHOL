@@ -13,17 +13,17 @@ SUBLIMEHOL_USER_DIR = None
 def plugin_loaded():
     global SUBLIMEHOL_DIR
     global SUBLIMEHOL_USER_DIR
-    SUBLIMEHOL_DIR = "Packages/SublimeHOL"
-    SUBLIMEHOL_USER_DIR = os.path.join(sublime.packages_path(), "User", "SublimeHOL")
+    SUBLIMEHOL_DIR = "Packages/HOL"
+    SUBLIMEHOL_USER_DIR = os.path.join(sublime.packages_path(), "User", "HOL")
 
 PY2 = False
 if sys.version_info[0] == 2:
     SUBLIMEHOL_DIR = os.getcwdu()
-    SUBLIMEHOL_USER_DIR = os.path.join(sublime.packages_path(), "User", "SublimeHOL")
+    SUBLIMEHOL_USER_DIR = os.path.join(sublime.packages_path(), "User", "HOL")
     PY2 = True
 
 # yes, CommandCommmand :) 
-class RunExistingWindowCommandCommand(sublime_plugin.WindowCommand):
+class HolRunExistingWindowCommandCommand(sublime_plugin.WindowCommand):
     def run(self, id, file):
         """Find and run existing command with id in specified file. 
         SUBLIMEHOL_USER_DIR is consulted first, and then SUBLIMEHOL_DIR""" 
