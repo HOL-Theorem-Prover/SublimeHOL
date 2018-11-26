@@ -9,8 +9,8 @@ Features
 --------
 #### HOL Files
 * HOL Syntax Highlighting
-* Tab completion from `` \` `` to smart quote pair ``‘’``
-    * Also from `` \`\` `` to ``“”``
+* Tab completion from `` ` `` to smart quote pair ``‘’``
+    * Also from ` `` ` to ``“”``
 * Unicode tab completion within HOL terms for common HOL ASCII sequences
     * Logical Symbols
         * ``!`` to ``∀``
