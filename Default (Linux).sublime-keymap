@@ -102,26 +102,27 @@
 			{ "key": "setting.repl", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["ctrl+,", "q", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
+	{ "keys": ["ctrl+,", "q", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();"}},
 	{ "keys": ["ctrl+,", "q", "l"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
 
-	{ "keys": ["ctrl+,", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "selection"}},
+	{ "keys": ["ctrl+,", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "append":";"}},
 	{ "keys": ["ctrl+,", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "g(", "append":");"}},
 	{ "keys": ["ctrl+,", "s", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
 	{ "keys": ["ctrl+,", "s", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
 	{ "keys": ["ctrl+,", "e"], "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(", "append":");"}},
 
-	{ "keys": ["ctrl+,", "l", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "lines"}},
+	{ "keys": ["ctrl+,", "l", "h"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "append":";"}},
 	{ "keys": ["ctrl+,", "l", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "g(", "append":");"}},
 	{ "keys": ["ctrl+,", "l", "s", "g"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
 	{ "keys": ["ctrl+,", "l", "s", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
 	{ "keys": ["ctrl+,", "l", "e"], "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(", "append":");"}},
 
-	{ "keys": ["ctrl+,", "t"], "command": "hol_repl_transfer_current", "args": {"scope": "file"}},
+	{ "keys": ["ctrl+,", "t"], "command": "hol_repl_transfer_current", "args": {"scope": "file", "append":";"}},
 
 	{ "keys": ["ctrl+,", "p"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
 	{ "keys": ["ctrl+,", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
 	{ "keys": ["ctrl+,", "r"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
+	{ "keys": ["ctrl+,", "d"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "drop();"}},
 
 	{ "keys": ["ctrl+,", "f", "y"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_types := (not (!show_types));"}},
 	{ "keys": ["ctrl+,", "f", "a"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_assums := (not (!show_assums));"}},
