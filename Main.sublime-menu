@@ -53,6 +53,7 @@
                         { "caption":"Print Current Goal", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
                         { "caption":"Go Back", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
                         { "caption":"Restart Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
+                        { "caption":"Drop Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "drop();"}},
                 ]},        
                 {"caption": "Toggle Flags On/Off",
                  "children":

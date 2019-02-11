@@ -142,6 +142,7 @@
 	{ "keys": ["ctrl+,", "p"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
 	{ "keys": ["ctrl+,", "b"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
 	{ "keys": ["ctrl+,", "r"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
+	{ "keys": ["ctrl+,", "d"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "drop();"}},
 
 	{ "keys": ["ctrl+,", "f", "y"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_types := (not (!show_types));"}},
 	{ "keys": ["ctrl+,", "f", "a"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_assums := (not (!show_assums));"}},
