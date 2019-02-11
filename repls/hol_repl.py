@@ -22,8 +22,8 @@ class HOLRepl(SubprocessRepl):
         stripped_command = re.sub('\(\*([\w\s\S]*?)\*\)','',stripped_command)
 
         #get open dependencies
-        open_lines       = re.findall('open (.*?);',stripped_command)
-        open_deps        = " ".join(open_lines).split(" ")
+        open_lines       = re.findall('open ([^;]*?);',stripped_command)
+        open_deps        = re.split(r"\n|\s", " ".join(open_lines))
 
         #get dot dependecies
         dot_deps         = re.findall('(\w*?)\.(?:.*?)',stripped_command)
@@ -41,6 +41,7 @@ class HOLRepl(SubprocessRepl):
     def send_signal(self, sig):
         if sig == signal.SIGTERM:
             self._killed = True
+        #if we have a print queue and are interrupting, clear the print queue
         out_queue = self.store_dict.get("print_queue",None)
         if sig == signal.SIGINT and out_queue:
             with out_queue.mutex:
