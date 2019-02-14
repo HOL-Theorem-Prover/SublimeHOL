@@ -60,15 +60,15 @@ contexts:
       scope: keyword.operator.assignment.hol
 
     # arithmetic operators
-    - match: '\*|\+|-|\/|~|\^|div|mod|::|@|>>|>-|THEN|THEN1|THENL|>\||\\'
+    - match: '\*|\+|-|\/|~|\^|\bdiv\b|\bmod\b|::|@|>>|>-|\bTHEN\b|\bTHEN1\b|\bTHENL\b|>\||\\'
       scope: keyword.operator.arithmetic.hol
 
     # logical operators
-    - match: 'orelse|andalso|not'
+    - match: '\b(orelse|andalso|not)\b'
       scope: keyword.operator.logical.hol
 
     # conditional
-    - match: '\bif\b|\bthen\b|\belse\b'
+    - match: '\b(if|then|else)\b'
       scope: keyword.control.conditional.hol
 
     # types
@@ -82,13 +82,13 @@ contexts:
     - match: '->|list'
       source: keyword.operator.constructor.hol
 
-    - match: 'print\b'
+    - match: '\bprint\b'
       scope: support.function.builtin.hol
 
-    - match: '^fun\s'
+    - match: '\b^fun\s'
       scope: storage.type.function.hol
 
-    - match: 'val\b'
+    - match: '\bval\b'
       scope: storage.type.hol
 
     - match: '(?<=fun\s)(\b\w+\b)\s\b(\w+?)\s'
