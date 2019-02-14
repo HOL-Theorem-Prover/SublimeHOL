@@ -96,6 +96,28 @@ contexts:
         1: entity.name.function.hol
         2: variable.parameter.hol
 
+    - match: 'Theorem'
+      scope: keyword.other
+      push: theorem_name
+
+  theorem_name:
+    - match : ':'
+      scope: keyword.other
+      set: theorem_goal
+    - match : '\('
+      pop: true
+  
+  theorem_goal:
+    - meta_scope: string.quoted.other.hol
+    - match: 'Proof'
+      scope: keyword.other
+      set: theorem_tac
+
+  theorem_tac:
+    - match: 'QED'
+      scope: keyword.other
+      pop: true
+
   double_term_ansi:
     - meta_scope: string.quoted.other.hol
     - match: '``'
