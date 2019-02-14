@@ -114,6 +114,7 @@ contexts:
       set: theorem_tac
 
   theorem_tac:
+    - include: main
     - match: 'QED'
       scope: keyword.other
       pop: true
