@@ -20,6 +20,7 @@ class HOLRepl(SubprocessRepl):
         stripped_command = re.sub('\‘([\w\s\S]*?)\’','',stripped_command)
         stripped_command = re.sub('\"([\w\s\S]*?)\"','',stripped_command)
         stripped_command = re.sub('\(\*([\w\s\S]*?)\*\)','',stripped_command)
+        stripped_command = re.sub('Theorem[^:]*?:[\w\s\S]*?Proof','',stripped_command)
 
         #get open dependencies
         open_lines       = re.findall('open ([^;]*?);',stripped_command)
