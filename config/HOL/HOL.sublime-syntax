@@ -96,7 +96,7 @@ contexts:
         1: entity.name.function.hol
         2: variable.parameter.hol
 
-    - match: 'Theorem'
+    - match: 'Theorem\s*'
       scope: keyword.other
       push: theorem_name
 
@@ -104,7 +104,7 @@ contexts:
     - match : ':'
       scope: keyword.other
       set: theorem_goal
-    - match : '\('
+    - match : '\s'
       pop: true
   
   theorem_goal:
