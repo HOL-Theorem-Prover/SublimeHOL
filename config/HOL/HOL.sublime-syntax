@@ -101,7 +101,7 @@ contexts:
       push: theorem_name
 
   theorem_name:
-    - match : ':'
+    - match : '\s*:'
       scope: keyword.other
       set: theorem_goal
     - match : '\s'
