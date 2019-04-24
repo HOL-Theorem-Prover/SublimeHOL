@@ -19,19 +19,6 @@ def default_sender(repl, text, view=None, repl_view=None):
     else:
         repl.write(text)
 
-    if view is None or not sublime.load_settings(SETTINGS_FILE).get('focus_view_on_transfer'):
-        return
-    active_window = sublime.active_window()
-    active_view = active_window.active_view()
-    target_view = repl_view.view
-    if target_view == active_view:
-        return  #
-    active_group = sublime.active_window().active_group()
-    if target_view in active_window.views_in_group(active_group):
-        return  # same group, dont switch
-    active_window.focus_view(target_view)
-    active_window.focus_view(active_view)
-
 
 """Senders is a dict of functions used to transfer text to repl as a repl
    specific load_file action"""
