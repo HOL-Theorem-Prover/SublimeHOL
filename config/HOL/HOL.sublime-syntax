@@ -100,6 +100,10 @@ contexts:
       scope: keyword.other
       push: theorem_name
 
+    - match: 'Definition\s*'
+      scope: keyword.other
+      push: definition_name
+
   theorem_name:
     - match : '\s*:'
       scope: keyword.other
@@ -116,6 +120,28 @@ contexts:
   theorem_tac:
     - include: main
     - match: 'QED'
+      scope: keyword.other
+      pop: true
+
+  definition_name:
+    - match : '\s*:'
+      scope: keyword.other
+      set: definition_value
+    - match : '\s'
+      pop: true
+
+  definition_value:
+    - meta_scope: string.quoted.other.hol
+    - match: 'Termination'
+      scope: keyword.other
+      set: definition_term_tac
+    - match: 'End'
+      scope: keyword.other
+      pop: true
+
+  definition_term_tac:
+    - include: main
+    - match: 'End'
       scope: keyword.other
       pop: true
 
