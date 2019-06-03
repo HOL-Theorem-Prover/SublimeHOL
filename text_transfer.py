@@ -123,8 +123,12 @@ class HolReplTransferCurrent(sublime_plugin.TextCommand):
                 cN  = nu_chars
             else:
                 cN -= nu_chars
-        #construct location string based on line and character number
-        locString = "(*#loc " + str(lN) + " " + str(cN) + " *)"
+        #construct location string based on line and character number (accounting for definition syntax)
+        if ntext[:10] == "Definition":
+            locString = "(*#loc " + str(lN - 1) + " 0 *)\n"
+        else:
+            locString = "(*#loc " + str(lN) + " " + str(cN) + " *)\n"
+
         if prepend != "" and ntext == "" and append == "":
             text = locString + prepend
         elif prepend != "" or ntext != "" or append != "":
