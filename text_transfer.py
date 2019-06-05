@@ -98,10 +98,8 @@ class HolReplTransferCurrent(sublime_plugin.TextCommand):
             possible_goals = [t[0] for t in matches] + [t[1] for t in matches]
             if possible_goals == []:
                 possible_goals = re.split('\‘|\’|`', text)
-            print(possible_goals)
             #take the largest possible goal and find how much deleted to get it
             ntext = max(possible_goals,key=len)
-            print(ntext)
             dL    = text.find(ntext)
             #augment prepend and append
             prepend += "‘"
