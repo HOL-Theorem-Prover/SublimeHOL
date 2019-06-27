@@ -42,18 +42,18 @@
                 {"caption": "Custom Line Eval in REPL",
                  "children":
                     [
-                        { "caption":"Goal", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "g(", "append":");"}},
-                        { "caption":"Subgoal", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
-                        { "caption":"Sufficient Condition", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
-                        { "caption":"Tactic", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": "e(", "append":");"}}
+                        { "caption":"Goal", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": ";\ng(", "append":");"}},
+                        { "caption":"Subgoal", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": ";\ne((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
+                        { "caption":"Sufficient Condition", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": ";\ne(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
+                        { "caption":"Tactic", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend": ";\ne(", "append":");"}}
                 ]},
                 {"caption": "REPL Control",
                  "children":
                     [
-                        { "caption":"Print Current Goal", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "p();"}},
-                        { "caption":"Go Back", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "b();"}},
-                        { "caption":"Restart Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "restart();"}},
-                        { "caption":"Drop Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "drop();"}},
+                        { "caption":"Print Current Goal", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\np();"}},
+                        { "caption":"Go Back", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nb();"}},
+                        { "caption":"Restart Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nrestart();"}},
+                        { "caption":"Drop Proof", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\ndrop();"}},
                 ]},        
                 {"caption": "Toggle Flags On/Off",
                  "children":
