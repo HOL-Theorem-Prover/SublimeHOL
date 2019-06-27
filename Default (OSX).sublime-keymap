@@ -148,6 +148,6 @@
 	{ "keys": ["ctrl+,", "f", "a"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nshow_assums := (not (!show_assums));"}},
 	{ "keys": ["ctrl+,", "f", "t"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nset_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");"}},
 	{ "keys": ["ctrl+,", "f", "f"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nset_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");"}}
-	{ "keys": ["ctrl+,", "f", "q"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend":";\nHOL_Interactive.toggle_quietdec();"}},
+	{ "keys": ["ctrl+,", "f", "q"], "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend":";\nHOL_Interactive.toggle_quietdec();"}}
 
 ]
