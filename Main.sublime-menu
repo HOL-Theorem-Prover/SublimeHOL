@@ -25,19 +25,19 @@
                 {"caption": "Eval in REPL",
                  "children":
                     [
-                        {"caption": "Selection", "command": "hol_repl_transfer_current", "args": {"scope": "selection"}},
-                        {"caption": "Selection (Quiet)", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
-                        {"caption": "Lines", "command": "hol_repl_transfer_current", "args": {"scope": "lines"}},
-                        {"caption": "Lines (Quiet)", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend":"HOL_Interactive.toggle_quietdec();\n", "append":"\nHOL_Interactive.toggle_quietdec();"}},
-                        {"caption": "File", "command": "hol_repl_transfer_current", "args": {"scope": "file"}}
+                        {"caption": "Selection", "command": "hol_repl_transfer_current", "args": {"scope": "selection","append":";"}},
+                        {"caption": "Selection (Quiet)", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend":";\nHOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();"}},
+                        {"caption": "Lines", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "append":";"}},
+                        {"caption": "Lines (Quiet)", "command": "hol_repl_transfer_current", "args": {"scope": "lines", "prepend":";\nHOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();"}},
+                        {"caption": "File", "command": "hol_repl_transfer_current", "args": {"scope": "file","prepend":";\n", "append":";"}}
                 ]},
                 {"caption": "Custom Selection Eval in REPL",
                  "children":
                     [
-                        { "caption":"Goal", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "g(", "append":");"}},
-                        { "caption":"Subgoal", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
-                        { "caption":"Sufficient Condition", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
-                        { "caption":"Tactic", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": "e(", "append":");"}}
+                        { "caption":"Goal", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": ";\ng(", "append":");"}},
+                        { "caption":"Subgoal", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": ";\ne((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");"}},
+                        { "caption":"Sufficient Condition", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": ";\ne(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
+                        { "caption":"Tactic", "command": "hol_repl_transfer_current", "args": {"scope": "selection", "prepend": ";\ne(", "append":");"}}
                 ]},
                 {"caption": "Custom Line Eval in REPL",
                  "children":
@@ -58,10 +58,11 @@
                 {"caption": "Toggle Flags On/Off",
                  "children":
                     [
-                        { "caption":"Show Types", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_types := (not (!show_types));"}},
-                        { "caption":"Show Assums", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "show_assums := (not (!show_assums));"}},
-                        { "caption":"Print Goal at Top", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");"}},
-                        { "caption":"Print Free Variables", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": "set_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");"}}
+                        {"caption": "Quiet Mode", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend":";\nHOL_Interactive.toggle_quietdec();"}},
+                        { "caption":"Show Types", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nshow_types := (not (!show_types));"}},
+                        { "caption":"Show Assums", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nshow_assums := (not (!show_assums));"}},
+                        { "caption":"Print Goal at Top", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nset_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");"}},
+                        { "caption":"Print Free Variables", "command": "hol_repl_transfer_current", "args": {"scope": "empty", "prepend": ";\nset_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");"}}
                 ]}, 
 
             ]   
