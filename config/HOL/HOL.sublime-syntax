@@ -96,11 +96,11 @@ contexts:
         1: entity.name.function.hol
         2: variable.parameter.hol
 
-    - match: 'Theorem\s*'
+    - match: '^Theorem\s*'
       scope: keyword.other
       push: theorem_name
 
-    - match: 'Definition\s*'
+    - match: '^Definition\s*'
       scope: keyword.other
       push: definition_name
 
@@ -113,13 +113,13 @@ contexts:
   
   theorem_goal:
     - meta_scope: string.quoted.other.hol
-    - match: 'Proof'
+    - match: '^Proof'
       scope: keyword.other
       set: theorem_tac
 
   theorem_tac:
     - include: main
-    - match: 'QED'
+    - match: '^QED'
       scope: keyword.other
       pop: true
 
@@ -132,10 +132,10 @@ contexts:
 
   definition_value:
     - meta_scope: string.quoted.other.hol
-    - match: 'Termination'
+    - match: '^Termination'
       scope: keyword.other
       set: definition_term_tac
-    - match: 'End'
+    - match: '^End'
       scope: keyword.other
       pop: true
 
