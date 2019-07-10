@@ -101,7 +101,7 @@ contexts:
       push: theorem_name
 
     - match: '^Definition\s*'
-      scope: keyword.other
+      scope: variable.function
       push: definition_name
 
   theorem_name:
@@ -125,7 +125,7 @@ contexts:
 
   definition_name:
     - match : '\s*:'
-      scope: keyword.other
+      scope: variable.function
       set: definition_value
     - match : '\s'
       pop: true
@@ -133,16 +133,16 @@ contexts:
   definition_value:
     - meta_scope: string.quoted.other.hol
     - match: '^Termination'
-      scope: keyword.other
+      scope: variable.function
       set: definition_term_tac
     - match: '^End'
-      scope: keyword.other
+      scope: variable.function
       pop: true
 
   definition_term_tac:
     - include: main
-    - match: 'End'
-      scope: keyword.other
+    - match: '^End'
+      scope: variable.function
       pop: true
 
   double_term_ansi:
