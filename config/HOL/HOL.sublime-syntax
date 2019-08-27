@@ -104,7 +104,7 @@ contexts:
       scope: variable.function
       push: definition_name
     
-    - match: '^Inductive|CoInductive\s*'
+    - match: '^(Inductive|CoInductive)\s*'
       scope: entity.name
       push: relation_name
     
