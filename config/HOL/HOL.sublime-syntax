@@ -103,6 +103,17 @@ contexts:
     - match: '^Definition\s*'
       scope: variable.function
       push: definition_name
+    
+    - match: '^Inductive|CoInductive\s*'
+      scope: entity.name
+      push: relation_name
+    
+    - match: '^Datatype:'
+      scope: constant.language
+      push: datatype_value
+    
+    - match: '^Type'
+      scope: constant.language
 
   theorem_name:
     - match : '\s*:'
@@ -143,6 +154,25 @@ contexts:
     - include: main
     - match: '^End'
       scope: variable.function
+      pop: true
+  
+  relation_name:
+    - match : '\s*:'
+      scope: entity.name
+      set: relation_value
+    - match : '\s'
+      pop: true
+  
+  relation_value:
+    - meta_scope: string.quoted.other.hol
+    - match: '^End'
+      scope: entity.name
+      pop: true
+    
+  datatype_value:
+    - meta_scope: string.quoted.other.hol
+    - match: '^End'
+      scope: constant.language
       pop: true
 
   double_term_ansi:
