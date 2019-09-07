@@ -124,6 +124,9 @@ contexts:
   
   theorem_goal:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '^Proof'
       scope: keyword.other
       set: theorem_tac
@@ -143,6 +146,9 @@ contexts:
 
   definition_value:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '^Termination'
       scope: variable.function
       set: definition_term_tac
@@ -165,6 +171,9 @@ contexts:
   
   relation_value:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '^End'
       scope: entity.name
       pop: true
@@ -177,21 +186,33 @@ contexts:
 
   double_term_ansi:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '``'
       pop: true
 
   single_term_ansi:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '`'
       pop: true
 
   double_term_unicode:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '”'
       pop: true
 
   single_term_unicode:
     - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
     - match: '’'
       pop: true
 
